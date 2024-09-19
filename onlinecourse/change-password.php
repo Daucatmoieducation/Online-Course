@@ -1,30 +1,36 @@
 
 <?php
-session_start();
-include('includes/config.php');
-error_reporting(0);
-if(strlen($_SESSION['login'])==0)
+session_start(); //khởi tạo session để qly thông tin người dùng đăng nhập
+include('includes/config.php'); 
+error_reporting(0); //Tắt hiển thị thông báo lỗi
+if(strlen($_SESSION['login'])==0) //ktra đăng nhập nếu k tồn tại  hoặc để trống
     {   
-header('location:index.php');
+header('location:index.php'); //về trang index.php
 }
-else{
-date_default_timezone_set('Asia/Kolkata');// change according timezone
+else{ 
+date_default_timezone_set('Asia/Kolkata');// đặt múi giờ theo khu vực 
 $currentTime = date( 'd-m-Y h:i:s A', time () );
-
+ 
 //Code for Change Password
 if(isset($_POST['submit']))
 { 
-$regno=$_SESSION['login'];   
-$currentpass=md5($_POST['cpass']);
-$newpass=md5($_POST['newpass']);
+$regno=$_SESSION['login'];   //lấy id (regno) hs từ session login
+$currentpass=md5($_POST['cpass']); //Mã hóa mật khẩu hiện tại
+$newpass=md5($_POST['newpass']); //Mã hóa mật khẩu mới
+
+//kiểm tra mật khẩu hiện tại
+//Truy vấn csdl để kiểm tra xem mật khẩu hiện tại có khớp với mật khẩu đã lưu trong csdl không.
 $sql=mysqli_query($con,"SELECT password FROM  students where password='$currentpass' && studentRegno='$regno'");
-$num=mysqli_fetch_array($sql);
+$num=mysqli_fetch_array($sql); //Lấy kết quả truy vấn. Nếu tồn tại bản ghi thì mật khẩu khớp.
+//nếu khớp, cập nhật mật khẩu mới và thời gian thay đổi trong csdl
 if($num>0)
 {
  $con=mysqli_query($con,"update students set password='$newpass', updationDate='$currentTime' where studentRegno='$regno'");
-echo '<script>alert("Password Changed Successfully !!")</script>';
-echo '<script>window.location.href=change-password.php</script>';
-}else{
+echo '<script>alert("Password Changed Successfully !!")</script>'; //tbao 
+echo '<script>window.location.href=change-password.php</script>'; //về trang change password
+}
+//hiển thị lỗi, về trang change-password
+else{ 
 echo '<script>alert("Current Password not match !!")</script>';
 echo '<script>window.location.href=change-password.php</script>';
 }
@@ -46,6 +52,7 @@ echo '<script>window.location.href=change-password.php</script>';
 <script type="text/javascript">
 function valid()
 {
+//thay đổi mật khẩu
 if(document.chngpwd.cpass.value=="")
 {
 alert("Current Password Filed is Empty !!");
@@ -78,7 +85,7 @@ return true;
     <!-- LOGO HEADER END-->
 <?php if($_SESSION['login']!="")
 {
- include('includes/menubar.php');
+ include('includes/menubar.php'); //chỉ hiển thị nếu người dùng đăng nhập
 }
  ?>
     <!-- MENU SECTION END-->
