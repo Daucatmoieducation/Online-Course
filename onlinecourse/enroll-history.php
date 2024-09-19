@@ -1,4 +1,6 @@
-<?php
+<!-- xem lịch sử đky khóa học và in thông tin chi tiết của từng khóa -->
+
+<?php //kiểm tra đăng nhập
 session_start();
 include('includes/config.php');
 error_reporting(0);
@@ -63,7 +65,8 @@ header('location:index.php');
                                         </tr>
                                     </thead>
                                     <tbody>
-<?php
+<!-- truy vấn csdl để lấy thông tin khóa học đã đky dựa trên id sv -->
+<?php 
 $sql=mysqli_query($con,"select courseenrolls.course as cid, course.courseName as courname,session.session as session,department.department as dept,level.level as level,courseenrolls.enrollDate as edate ,semester.semester as sem from courseenrolls join course on course.id=courseenrolls.course join session on session.id=courseenrolls.session join department on department.id=courseenrolls.department join level on level.id=courseenrolls.level  join semester on semester.id=courseenrolls.semester  where courseenrolls.studentRegno='".$_SESSION['login']."'");
 $cnt=1;
 while($row=mysqli_fetch_array($sql))
@@ -71,8 +74,8 @@ while($row=mysqli_fetch_array($sql))
 ?>
 
 
-                                        <tr>
-                                            <td><?php echo $cnt;?></td>
+                                        <tr> 
+                                            <td><?php echo $cnt;?></td> <!--hiển thị stt, bắt đầu bằng 1, htmlentities: Đảm bảo an toàn và ngăn chặn lỗi hiển thị. -->
                                             <td><?php echo htmlentities($row['courname']);?></td>
                                             <td><?php echo htmlentities($row['session']);?></td>
                                             <td><?php echo htmlentities($row['dept']);?></td>
@@ -80,6 +83,7 @@ while($row=mysqli_fetch_array($sql))
                                             <td><?php echo htmlentities($row['sem']);?></td>
                                              <td><?php echo htmlentities($row['edate']);?></td>
                                             <td>
+                                            <!-- button để in thông tin khóa học trong tab mới (target="_blank) -->
                                             <a href="print.php?id=<?php echo $row['cid']?>" target="_blank">
 <button class="btn btn-primary"><i class="fa fa-print "></i> Print</button> </a>                                        
 
