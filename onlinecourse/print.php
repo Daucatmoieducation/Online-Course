@@ -97,7 +97,7 @@ header('location:index.php');
 
 <body>
     <div class="invoice-box">
-<?php
+<?php //truy vấn csdl để lấy thông tin sv và khóa học
 $cid=intval($_GET['id']);
 $sql=mysqli_query($con,"select course.courseName as courname,course.courseCode as ccode,course.courseUnit as cunit,session.session as session,department.department as dept,level.level as level,courseenrolls.enrollDate as edate,semester.semester as sem ,students.studentName as studentname,students.studentPhoto as photo,students.cgpa as scgpa,students.creationdate as studentregdate from courseenrolls join course on course.id=courseenrolls.course join session on session.id=courseenrolls.session join department on department.id=courseenrolls.department join level on level.id=courseenrolls.level join students on students.StudentRegno=courseenrolls.StudentRegno join semester on semester.id=courseenrolls.semester where courseenrolls.studentRegno='".$_SESSION['login']."' and courseenrolls.course='$cid'");
 $cnt=1;
@@ -118,10 +118,10 @@ while($row=mysqli_fetch_array($sql))
                             </td>
                             
                             <td>
-                               <b> Reg No: </b><?php echo htmlentities($_SESSION['login']);?><br>
-                               <b> Student Name: </b>  <?php echo htmlentities($row['studentname']);?><br>
-                               <b> Student Reg Date:</b> <?php echo htmlentities($row['studentregdate']);?><br>
-                                <b> Student Course Enroll Date:</b> <?php echo htmlentities($row['edate']);?><br>
+                               <b> Mã Sinh Viên: </b><?php echo htmlentities($_SESSION['login']);?><br>
+                               <b> Tên Sinh Viên: </b>  <?php echo htmlentities($row['studentname']);?><br>
+                               <b> Ngày Đăng Ký Tài Khoản:</b> <?php echo htmlentities($row['studentregdate']);?><br>
+                                <b> Ngày Đăng Ký Khóa Học:</b> <?php echo htmlentities($row['edate']);?><br>
                             </td>
                         </tr>
                     </table>
@@ -130,7 +130,7 @@ while($row=mysqli_fetch_array($sql))
       
             <tr class="heading">
                 <td>
-                   Course Details
+                   Chi Tiết Khóa Học  
                 </td>
                 
                 <td>
@@ -140,7 +140,7 @@ while($row=mysqli_fetch_array($sql))
             
             <tr class="details">
                 <td>
-                  Course Code
+                  Mã Khóa Học  
                 </td>
                 
                 <td>
@@ -150,7 +150,7 @@ while($row=mysqli_fetch_array($sql))
 
             <tr class="details">
                 <td>
-                  Course Name
+                  Tên Khóa Học  
                 </td>
                 
                 <td>
@@ -161,7 +161,7 @@ while($row=mysqli_fetch_array($sql))
 
             <tr class="details">
                 <td>
-                  Course unit
+                  Số tín chỉ
                 </td>
                 
                 <td>
@@ -181,7 +181,7 @@ while($row=mysqli_fetch_array($sql))
             
             <tr class="item">
                 <td>
-                     Session
+                     Năm Học  
                 </td>
                 
                 <td>
@@ -191,7 +191,7 @@ while($row=mysqli_fetch_array($sql))
             
             <tr class="item">
                 <td>
-                   Department
+                   Chuyên Ngành  
                 </td>
                 
                 <td>
@@ -200,7 +200,7 @@ while($row=mysqli_fetch_array($sql))
             </tr>
  <tr class="item">
                 <td>
-                   Level
+                   Lớp  
                 </td>
                 
                 <td>
@@ -211,7 +211,7 @@ while($row=mysqli_fetch_array($sql))
 
              <tr class="item">
                 <td>
-                   CGPA
+                   CGPA  
                 </td>
                 
                 <td>
@@ -221,7 +221,7 @@ while($row=mysqli_fetch_array($sql))
             
             <tr class="item last">
                 <td>
-                   Semester
+                   Học Kỳ  
                 </td>
                 
                 <td>

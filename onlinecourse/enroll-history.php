@@ -53,8 +53,8 @@ header('location:index.php');
                                         <tr>
                                             <th>#</th>
                                             <th>Môn Học</th>
-                                            <th> Khoa</th>
-                                            <th>Cấp</th>
+                                            <th>Khoa</th>
+                                            <th>Lớp</th>
                                             <th>Học kỳ</th>
                                             <th>Thời Gian Đăng Ký</th>
                                          

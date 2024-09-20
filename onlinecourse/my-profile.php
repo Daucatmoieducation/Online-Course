@@ -6,7 +6,7 @@ error_reporting(0);
 if (strlen($_SESSION['login']) == 0) {   
     header('location:index.php');
 } else {
-    if (isset($_POST['submit'])) {
+    if (isset($_POST['submit'])) { //cập nhật thông tin sv
         $studentname = $_POST['studentname'];
         $photo = $_FILES["photo"]["name"];
         $cgpa = $_POST['cgpa'];
@@ -17,7 +17,7 @@ if (strlen($_SESSION['login']) == 0) {
             echo '<script>alert("Thay đổi thông tin thành Công!!")</script>';
             echo '<script>window.location.href=my-profile.php</script>';
         } else {
-            echo '<script>alert("Something went wrong. Please try again.!")</script>';
+            echo '<script>alert("Đã xảy ra lỗi. Vui lòng thử lại!")</script>';
             echo '<script>window.location.href=my-profile.php</script>';
         }
     }
@@ -62,7 +62,7 @@ if (strlen($_SESSION['login']) == 0) {
                         <?php echo htmlentities($_SESSION['msg'] = ""); ?>
                     </font>
 
-                    <?php 
+                    <?php //hiển thị thông tin sv
                     $sql = mysqli_query($con, "SELECT * FROM students WHERE StudentRegno='" . $_SESSION['login'] . "'");
                     $cnt = 1;
                     while ($row = mysqli_fetch_array($sql)) { 

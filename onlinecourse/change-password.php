@@ -31,7 +31,7 @@ echo '<script>window.location.href=change-password.php</script>'; //về trang c
 }
 //hiển thị lỗi, về trang change-password
 else{ 
-echo '<script>alert("Current Password not match !!")</script>';
+echo '<script>alert("Mật khẩu hiện tại không khớp !!")</script>';
 echo '<script>window.location.href=change-password.php</script>';
 }
 }
@@ -93,7 +93,7 @@ return true;
         <div class="container">
               <div class="row">
                     <div class="col-md-12">
-                        <h1 class="page-head-line">đổi mật khẩu</h1>
+                        <h1 class="page-head-line">Đổi mật khẩu</h1>
                     </div>
                 </div>
                 <div class="row" >

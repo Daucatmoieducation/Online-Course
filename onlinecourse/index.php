@@ -2,13 +2,13 @@
 session_start();
 error_reporting(0);
 include("includes/config.php");
-if(isset($_POST['submit']))
+if(isset($_POST['submit'])) //xử lý biểu mẫu đăng nhập
 {
     $regno=$_POST['regno'];
     $password=md5($_POST['password']);
 $query=mysqli_query($con,"SELECT * FROM students WHERE StudentRegno='$regno' and password='$password'");
 $num=mysqli_fetch_array($query);
-if($num>0)
+if($num>0) //xác thực người dùng
 {
 $_SESSION['login']=$_POST['regno'];
 $_SESSION['id']=$num['studentRegno'];
@@ -47,7 +47,7 @@ header("location:http:index.php");
                     <div class="navbar-collapse collapse ">
                         <ul id="menu-top" class="nav navbar-nav navbar-right">
                              <li><a href="index.php">Home </a></li>
-                             <li><a href="admin/">Admin Login </a></li>
+                             <!-- <li><a href="admin/">Admin Login </a></li> -->
                         </ul>
                     </div>
                 </div>

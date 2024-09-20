@@ -8,7 +8,7 @@ header('location:index.php');
 }
 else{
 
-if(isset($_POST['submit']))
+if(isset($_POST['submit'])) //xử lý đky học khi nhấn submit
 {
 $studentregno=$_POST['studentregno'];
 $pincode=$_POST['Pincode'];
@@ -17,13 +17,14 @@ $dept=$_POST['department'];
 $level=$_POST['level'];
 $course=$_POST['course'];
 $sem=$_POST['sem'];
+//chèn dữ liệu vào bảng courseenrolls
 $ret=mysqli_query($con,"insert into courseenrolls(studentRegno,pincode,session,department,level,course,semester) values('$studentregno','$pincode','$session','$dept','$level','$course','$sem')");
 if($ret)
 {
 echo '<script>alert("Đăng Ký Thành Công !!")</script>';
 echo '<script>window.location.href=enroll.php</script>';
 }else{
-echo '<script>alert("Error : Not Enroll")</script>';
+echo '<script>alert("Lỗi : Đăng Ký Không Thành Công")</script>';
 echo '<script>window.location.href=enroll.php</script>';
 }
 }
@@ -36,7 +37,7 @@ echo '<script>window.location.href=enroll.php</script>';
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>Course Enroll</title>
+    <title>Đăng Ký Khóa Học</title>
     <link href="assets/css/bootstrap.css" rel="stylesheet" />
     <link href="assets/css/font-awesome.css" rel="stylesheet" />
     <link href="assets/css/style.css" rel="stylesheet" />
@@ -63,6 +64,8 @@ echo '<script>window.location.href=enroll.php</script>';
                     <div class="col-md-6">
                         <div class="panel panel-default">
 <font color="green" align="center"><?php echo htmlentities($_SESSION['msg']);?><?php echo htmlentities($_SESSION['msg']="");?></font>
+
+<!-- hiển thị thông tin sv -->
 <?php $sql=mysqli_query($con,"select * from students where StudentRegno='".$_SESSION['login']."'");
 $cnt=1;
 while($row=mysqli_fetch_array($sql))
@@ -92,7 +95,7 @@ while($row=mysqli_fetch_array($sql))
 <div class="form-group">
     <label for="Session">Năm Học  </label>
     <select class="form-control" name="session" required="required">
-   <option value="">Chọn Năm Học</option>   
+   <option value="">Chọn Năm Học  </option>   
    <?php 
 $sql=mysqli_query($con,"select * from session");
 while($row=mysqli_fetch_array($sql))
@@ -125,7 +128,7 @@ while($row=mysqli_fetch_array($sql))
 <div class="form-group">
     <label for="Level">Lớp  </label>
     <select class="form-control" name="level" required="required">
-   <option value="">Chọn Lớp</option>   
+   <option value="">Chọn Lớp  </option>   
    <?php 
 $sql=mysqli_query($con,"select * from level");
 while($row=mysqli_fetch_array($sql))
@@ -140,7 +143,7 @@ while($row=mysqli_fetch_array($sql))
 <div class="form-group">
     <label for="Semester">Học Kỳ  </label>
     <select class="form-control" name="sem" required="required">
-   <option value="">Chọn Học Kỳ</option>   
+   <option value="">Chọn Học Kỳ  </option>   
    <?php 
 $sql=mysqli_query($con,"select * from semester");
 while($row=mysqli_fetch_array($sql))
@@ -156,7 +159,7 @@ while($row=mysqli_fetch_array($sql))
 <div class="form-group">
     <label for="Course">Môn Học  </label>
     <select class="form-control" name="course" id="course" onBlur="courseAvailability()" required="required">
-   <option value="">Chọn Môn Học</option>   
+   <option value="">Chọn Môn Học  </option>   
    <?php 
 $sql=mysqli_query($con,"select * from course");
 while($row=mysqli_fetch_array($sql))
@@ -179,18 +182,13 @@ while($row=mysqli_fetch_array($sql))
                 </div>
 
             </div>
-
-
-
-
-
         </div>
     </div>
   <?php include('includes/footer.php');?>
     <script src="assets/js/jquery-1.11.1.js"></script>
     <script src="assets/js/bootstrap.js"></script>
 <script>
-function courseAvailability() {
+function courseAvailability() { //ktra khóa học có sẵn không qua check_availability.php
 $("#loaderIcon").show();
 jQuery.ajax({
 url: "check_availability.php",

@@ -10,11 +10,11 @@ $query=mysqli_query($con,"SELECT * FROM students WHERE StudentRegno='$regno' and
 $num=mysqli_fetch_array($query);
 if($num>0)
 {
-$extra="change-password.php";//
+$extra="change-password.php";
 $_SESSION['login']=$_POST['regno'];
 $_SESSION['id']=$num['studentRegno'];
 $_SESSION['sname']=$num['studentName'];
-$uip=$_SERVER['REMOTE_ADDR'];
+$uip=$_SERVER['REMOTE_ADDR']; // lấy đchi ip của người dùng và lưu trạng thái đăng nhập vào bảng userlog để theo dõi lịch sử đăng nhập
 $status=1;
 $log=mysqli_query($con,"insert into userlog(studentRegno,userip,status) values('".$_SESSION['login']."','$uip','$status')");
 }
@@ -51,15 +51,14 @@ header("location:http:index.php");
                 <div class="col-md-12">
                     <div class="navbar-collapse collapse ">
                         <ul id="menu-top" class="nav navbar-nav navbar-right">
-                             <li><a href="index.php">Home </a></li>
-                             <li><a href="admin/">Admin Login </a></li>
-                              <li><a href="index.php">Student Login</a></li>
+                            <li><a href="index.php">Home </a></li>
+                            <!-- <li><a href="admin/">Admin Login </a></li> -->
+                            <li><a href="index.php">Student Login</a></li>
         
 
                         </ul>
                     </div>
                 </div>
-
             </div>
         </div>
     </section>
@@ -70,9 +69,7 @@ header("location:http:index.php");
             <div class="row">
                 <div class="col-md-12">
                     <h4 class="page-head-line">News Details </h4>
-
                 </div>
-
             </div>
 
 
@@ -80,7 +77,7 @@ header("location:http:index.php");
                     <div class="alert alert-info">
         
                         <ul>
-<?php $nid=$_GET['nid'];
+<?php $nid=$_GET['nid']; //hiển thị tiêu đề và nội dung tin tức qua id
 $sql=mysqli_query($con,"select * from news where id='$nid'");
 $cnt=1;
 while($row=mysqli_fetch_array($sql))
@@ -96,7 +93,6 @@ while($row=mysqli_fetch_array($sql))
                        
                     </div>
                                     </div>
-
             </div>
         </div>
     </div>
