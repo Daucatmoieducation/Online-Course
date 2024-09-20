@@ -48,9 +48,6 @@ header("location:http:index.php");
                         <ul id="menu-top" class="nav navbar-nav navbar-right">
                              <li><a href="index.php">Home </a></li>
                              <li><a href="admin/">Admin Login </a></li>
-                              <li><a href="index.php">Student Login</a></li>
-        
-
                         </ul>
                     </div>
                 </div>
@@ -64,7 +61,7 @@ header("location:http:index.php");
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <h4 class="page-head-line">Please Login To Enter </h4>
+                    <h4 class="page-head-line">Đăng nhập</h4>
 
                 </div>
 
@@ -73,12 +70,12 @@ header("location:http:index.php");
             <form name="admin" method="post">
             <div class="row">
                 <div class="col-md-6">
-                     <label>Enter Reg no : </label>
+                     <label>Mã Sinh Viên: </label>
                         <input type="text" name="regno" class="form-control"  />
-                        <label>Enter Password :  </label>
+                        <label>Mật Khẩu:  </label>
                         <input type="password" name="password" class="form-control"  />
                         <hr />
-                        <button type="submit" name="submit" class="btn btn-info"><span class="glyphicon glyphicon-user"></span> &nbsp;Log Me In </button>&nbsp;
+                        <button type="submit" name="submit" class="btn btn-info"> &nbsp;Đăng Nhập</button>&nbsp;
                 </div>
                 </form>
                 <div class="col-md-6">

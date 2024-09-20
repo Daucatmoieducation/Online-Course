@@ -2,7 +2,7 @@
 session_start();
 include('includes/config.php');
 error_reporting(0);
-if(strlen($_SESSION['login'])==0 or strlen($_SESSION['pcode'])==0)
+if(strlen($_SESSION['login'])==0 or strlen($_SESSION['pcode'])!=0)
     {   
 header('location:index.php');
 }
@@ -20,7 +20,7 @@ $sem=$_POST['sem'];
 $ret=mysqli_query($con,"insert into courseenrolls(studentRegno,pincode,session,department,level,course,semester) values('$studentregno','$pincode','$session','$dept','$level','$course','$sem')");
 if($ret)
 {
-echo '<script>alert("Enroll Successfully !!")</script>';
+echo '<script>alert("Đăng Ký Thành Công !!")</script>';
 echo '<script>window.location.href=enroll.php</script>';
 }else{
 echo '<script>alert("Error : Not Enroll")</script>';
@@ -55,16 +55,13 @@ echo '<script>window.location.href=enroll.php</script>';
         <div class="container">
               <div class="row">
                     <div class="col-md-12">
-                        <h1 class="page-head-line">Course Enroll </h1>
+                        <h1 class="page-head-line">Đăng ký học</h1>
                     </div>
                 </div>
                 <div class="row" >
                   <div class="col-md-3"></div>
                     <div class="col-md-6">
                         <div class="panel panel-default">
-                        <div class="panel-heading">
-                          Course Enroll
-                        </div>
 <font color="green" align="center"><?php echo htmlentities($_SESSION['msg']);?><?php echo htmlentities($_SESSION['msg']="");?></font>
 <?php $sql=mysqli_query($con,"select * from students where StudentRegno='".$_SESSION['login']."'");
 $cnt=1;
@@ -74,12 +71,12 @@ while($row=mysqli_fetch_array($sql))
                         <div class="panel-body">
                        <form name="dept" method="post" enctype="multipart/form-data">
    <div class="form-group">
-    <label for="studentname">Student Name  </label>
+    <label for="studentname">Tên Sinh Viên</label>
     <input type="text" class="form-control" id="studentname" name="studentname" value="<?php echo htmlentities($row['studentName']);?>"  />
   </div>
 
  <div class="form-group">
-    <label for="studentregno">Student Reg No   </label>
+    <label for="studentregno">Mã Sinh Viên   </label>
     <input type="text" class="form-control" id="studentregno" name="studentregno" value="<?php echo htmlentities($row['StudentRegno']);?>"  placeholder="Student Reg no" readonly />
     
   </div>
@@ -90,20 +87,12 @@ while($row=mysqli_fetch_array($sql))
     <label for="Pincode">Pincode  </label>
     <input type="text" class="form-control" id="Pincode" name="Pincode" readonly value="<?php echo htmlentities($row['pincode']);?>" required />
   </div>   
-
-<div class="form-group">
-    <label for="Pincode">Student Photo  </label>
-   <?php if($row['studentPhoto']==""){ ?>
-   <img src="studentphoto/noimage.png" width="200" height="200"><?php } else {?>
-   <img src="studentphoto/<?php echo htmlentities($row['studentPhoto']);?>" width="200" height="200">
-   <?php } ?>
-  </div>
  <?php } ?>
 
 <div class="form-group">
-    <label for="Session">Session  </label>
+    <label for="Session">Năm Học  </label>
     <select class="form-control" name="session" required="required">
-   <option value="">Select Session</option>   
+   <option value="">Chọn Năm Học</option>   
    <?php 
 $sql=mysqli_query($con,"select * from session");
 while($row=mysqli_fetch_array($sql))
@@ -118,9 +107,9 @@ while($row=mysqli_fetch_array($sql))
 
 
 <div class="form-group">
-    <label for="Department">Department  </label>
+    <label for="Department">Chuyên Ngành  </label>
     <select class="form-control" name="department" required="required">
-   <option value="">Select Depertment</option>   
+   <option value="">Chọn Chuyên Ngành</option>   
    <?php 
 $sql=mysqli_query($con,"select * from department");
 while($row=mysqli_fetch_array($sql))
@@ -134,9 +123,9 @@ while($row=mysqli_fetch_array($sql))
 
 
 <div class="form-group">
-    <label for="Level">Level  </label>
+    <label for="Level">Lớp  </label>
     <select class="form-control" name="level" required="required">
-   <option value="">Select Level</option>   
+   <option value="">Chọn Lớp</option>   
    <?php 
 $sql=mysqli_query($con,"select * from level");
 while($row=mysqli_fetch_array($sql))
@@ -149,9 +138,9 @@ while($row=mysqli_fetch_array($sql))
   </div>  
 
 <div class="form-group">
-    <label for="Semester">Semester  </label>
+    <label for="Semester">Học Kỳ  </label>
     <select class="form-control" name="sem" required="required">
-   <option value="">Select Semester</option>   
+   <option value="">Chọn Học Kỳ</option>   
    <?php 
 $sql=mysqli_query($con,"select * from semester");
 while($row=mysqli_fetch_array($sql))
@@ -165,9 +154,9 @@ while($row=mysqli_fetch_array($sql))
 
 
 <div class="form-group">
-    <label for="Course">Course  </label>
+    <label for="Course">Môn Học  </label>
     <select class="form-control" name="course" id="course" onBlur="courseAvailability()" required="required">
-   <option value="">Select Course</option>   
+   <option value="">Chọn Môn Học</option>   
    <?php 
 $sql=mysqli_query($con,"select * from course");
 while($row=mysqli_fetch_array($sql))
@@ -181,7 +170,7 @@ while($row=mysqli_fetch_array($sql))
 
 
 
- <button type="submit" name="submit" id="submit" class="btn btn-default">Enroll</button>
+ <button type="submit" name="submit" id="submit" class="btn btn-default">Đăng Ký</button>
 </form>
                             </div>
                             </div>

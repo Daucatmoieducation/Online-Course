@@ -26,7 +26,7 @@ $num=mysqli_fetch_array($sql); //Lấy kết quả truy vấn. Nếu tồn tại
 if($num>0)
 {
  $con=mysqli_query($con,"update students set password='$newpass', updationDate='$currentTime' where studentRegno='$regno'");
-echo '<script>alert("Password Changed Successfully !!")</script>'; //tbao 
+echo '<script>alert("Thay đổi mật khẩu thành công !!")</script>'; //tbao 
 echo '<script>window.location.href=change-password.php</script>'; //về trang change password
 }
 //hiển thị lỗi, về trang change-password
@@ -93,40 +93,32 @@ return true;
         <div class="container">
               <div class="row">
                     <div class="col-md-12">
-                        <h1 class="page-head-line">Student Change Password </h1>
+                        <h1 class="page-head-line">đổi mật khẩu</h1>
                     </div>
                 </div>
                 <div class="row" >
                   <div class="col-md-3"></div>
                     <div class="col-md-6">
                         <div class="panel panel-default">
-                        <div class="panel-heading">
-                           Change Password
-                        </div>
 <font color="green" align="center"><?php echo htmlentities($_SESSION['msg']);?><?php echo htmlentities($_SESSION['msg']="");?></font>
-
 
                         <div class="panel-body">
                        <form name="chngpwd" method="post" onSubmit="return valid();">
    <div class="form-group">
-    <label for="exampleInputPassword1">Current Password</label>
+    <label for="exampleInputPassword1">Mật Khẩu Cũ</label>
     <input type="password" class="form-control" id="exampleInputPassword1" name="cpass" placeholder="Password" />
   </div>
    <div class="form-group">
-    <label for="exampleInputPassword1">New Password</label>
+    <label for="exampleInputPassword1">Mật Khẩu Mới</label>
     <input type="password" class="form-control" id="exampleInputPassword2" name="newpass" placeholder="Password" />
   </div>
   <div class="form-group">
-    <label for="exampleInputPassword1">Confirm Password</label>
+    <label for="exampleInputPassword1">Xác Nhận Lại</label>
     <input type="password" class="form-control" id="exampleInputPassword3" name="cnfpass" placeholder="Password" />
   </div>
  
-  <button type="submit" name="submit" class="btn btn-default">Submit</button>
+  <button type="submit" name="submit" class="btn btn-default">Confirm</button>
                            <hr />
-   
-
-
-
 </form>
                             </div>
                             </div>
